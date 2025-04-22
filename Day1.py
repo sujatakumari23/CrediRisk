@@ -1,5 +1,5 @@
 # ============================
-# 🗓️ DAY 1: Initial Setup, Utilities & Data Loading
+# DAY 1: Initial Setup, Utilities & Data Loading
 # ============================
 
 import pandas as pd
@@ -23,7 +23,6 @@ from catboost import CatBoostClassifier
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline as ImbPipeline
 
-import shap
 import warnings
 import time
 import os
@@ -31,17 +30,16 @@ import os
 warnings.filterwarnings("ignore")
 sns.set(style="whitegrid")
 
-# ✅ Utility function to track time usage
 def timer(func):
     def wrapper(*args, **kwargs):
         start = time.time()
         result = func(*args, **kwargs)
         end = time.time()
-        print(f"\n⏱️ Time taken by '{func.__name__}': {end - start:.2f}s")
+        print(f"\n⏱ Time taken by '{func._name_}': {end - start:.2f}s")
         return result
     return wrapper
 
-# ✅ Print data info, columns, and descriptive stats
+
 def describe_data(df):
     print("\n🔍 Data Info:")
     print(df.info())
@@ -49,7 +47,6 @@ def describe_data(df):
     print(df.describe(include='all'))
     print("\n🆔 Column Names:", df.columns.tolist())
 
-# ✅ Load CSV file into DataFrame
 @timer
 def load_data(path):
     df = pd.read_csv(path)
