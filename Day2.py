@@ -1,3 +1,7 @@
+# ============================
+#  DAY 2: Exploratory Data Analysis
+# ============================
+
 @timer
 def run_eda(df):
     describe_data(df)
@@ -23,7 +27,6 @@ def run_eda(df):
         plt.tight_layout()
         plt.show()
 
-
 @timer
 def feature_engineering(df):
     df = df.copy()
@@ -35,7 +38,7 @@ def feature_engineering(df):
 
 @timer
 def preprocess(df, target):
-    df = df.dropna(subset=[target]) # Drop rows with NaN in the target column before splitting.
+    df = df.dropna(subset=[target])
     X = df.drop(columns=[target])
     y = df[target]
 
