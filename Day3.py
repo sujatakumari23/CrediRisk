@@ -1,3 +1,7 @@
+# ============================
+#  DAY 3: Model Training and Evaluation
+# ============================
+
 def get_models():
     return {
         "Logistic Regression": LogisticRegression(max_iter=1000),
@@ -33,25 +37,10 @@ def evaluate_model(name, model, X_train, X_test, y_train, y_test):
     fpr, tpr, _ = roc_curve(y_test, y_proba)
     plt.plot(fpr, tpr, label=f"{name} (AUC = {roc_auc_score(y_test, y_proba):.2f})")
 
-
-# ============================
-# 🗓️ DAY 5: Model Explainability & Integration
-# ============================
-
-@timer
-def explain_model(model, X_train):
-    try:
-        explainer = shap.Explainer(model)
-        shap_values = explainer(X_train[:100])
-        shap.summary_plot(shap_values, X_train[:100])
-    except Exception as e:
-        print("❌ SHAP Explainability Failed:", e)
-
 @timer
 def main():
-    FILE_PATH = "train1.csv"  # 🔁 Replace with your dataset
-    TARGET = "credit_card_default"                   # 🎯 Replace with your actual target column
-
+    FILE_PATH = r"C:\Users\HP\Downloads\train1.csv"
+    TARGET = "credit_card_default"
     df = load_data(FILE_PATH)
     run_eda(df)
     df = feature_engineering(df)
@@ -84,9 +73,6 @@ def main():
         ('classifier', XGBClassifier(use_label_encoder=False, eval_metric='logloss'))
     ])
     best_model.fit(X_train, y_train)
-    transformed = preprocessor.fit_transform(X_train)
-    explain_model(best_model.named_steps['classifier'], pd.DataFrame(transformed))
 
-# Start the 5-day workflow
-if __name__ == '__main__':
+if _name_ == '_main_':
     main()
